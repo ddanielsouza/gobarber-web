@@ -1,4 +1,10 @@
-import React, { InputHTMLAttributes, useEffect, useRef, useState, useCallback } from 'react';
+import React, {
+  InputHTMLAttributes,
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+} from 'react';
 import { IconBaseProps } from 'react-icons/lib';
 import { useField } from '@unform/core';
 import { Container } from './styles';
@@ -22,29 +28,34 @@ const Input: React.FC<InputProps> = ({ name, icon: Icon, ...rest }) => {
     });
   }, [fieldName, registerField]);
 
-  const handleInputBlur = useCallback(()=>{
+  const handleInputBlur = useCallback(() => {
     setIsFocused(false);
-    setIsFilled( !!inputRef?.current?.value );
+    setIsFilled(!!inputRef?.current?.value);
   }, []);
 
-  const handleInputFocus = useCallback(()=>{
+  const handleInputFocus = useCallback(() => {
     setIsFocused(true);
   }, []);
 
-  const handleClickContainer= useCallback(()=>{
-    inputRef?.current?.focus()
+  const handleClickContainer = useCallback(() => {
+    inputRef?.current?.focus();
   }, []);
 
   return (
-    <Container isFocused={isFocused} isFilled={isFilled} onClick={handleClickContainer}>
+    <Container
+      isFocused={isFocused}
+      isFilled={isFilled}
+      onClick={handleClickContainer}
+    >
       {Icon && <Icon size={20} />}
       <input
         onFocus={handleInputFocus}
-        onBlur={ handleInputBlur }
+        onBlur={handleInputBlur}
         defaultValue={defaultValue}
         ref={inputRef}
         {...rest}
       />
+      {error}
     </Container>
   );
 };
