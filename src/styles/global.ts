@@ -1,4 +1,28 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, keyframes } from 'styled-components';
+
+const appearFromLeft = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(-50px)
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0)
+  }
+`;
+
+const appearFromRight = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(50px)
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0)
+  }
+`;
 
 export default createGlobalStyle`
   * {
@@ -12,6 +36,7 @@ export default createGlobalStyle`
     background: #312E38;
     color: #FFF;
     -webkit-font-smoothing: antialiased;
+  }
 
   body, input, button {
     font-family: 'Roboto Slab', serif;
@@ -24,5 +49,13 @@ export default createGlobalStyle`
 
   button, a {
     cursor: pointer;
+  }
+
+  .appear-from-left > * {
+    animation: ${appearFromLeft} 1s
+  }
+
+  .appear-from-right > * {
+    animation: ${appearFromRight} 1s
   }
 `;

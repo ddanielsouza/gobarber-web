@@ -46,7 +46,7 @@ const SignUp: React.FC = () => {
   return (
     <Container>
       <Background />
-      <Content>
+      <Content className="appear-from-right">
         <img src={logoImg} alt="Logo - GoBarber" />
 
         <Form onSubmit={handleSubmit} ref={formRef}>

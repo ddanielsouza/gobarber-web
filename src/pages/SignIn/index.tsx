@@ -69,7 +69,7 @@ const SignIn: React.FC = () => {
 
   return (
     <Container>
-      <Content>
+      <Content className="appear-from-left">
         <img src={logoImg} alt="Logo - GoBarber" />
 
         <Form onSubmit={handleSubmit} ref={formRef}>
