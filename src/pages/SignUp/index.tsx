@@ -18,7 +18,7 @@ const SignUp: React.FC = () => {
   const history = useHistory();
 
   const handleSubmit = useCallback(
-    async (data: any): Promise<void> => {
+    async (data: object): Promise<void> => {
       const messageRequired = (fieldDescription: string) =>
         `${fieldDescription} é obrigatório(a)`;
 
