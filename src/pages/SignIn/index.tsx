@@ -2,7 +2,7 @@ import React, { useRef, useCallback } from 'react';
 import { FiLogIn, FiMail, FiLock } from 'react-icons/fi';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { FormHandles } from '@unform/core';
 import { Container, Content, Background } from './styles';
 import logoImg from '../../assets/logo.svg';
@@ -21,7 +21,7 @@ const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const { signIn } = useAuth();
   const { addToast } = useToast();
-
+  const history = useHistory();
   const handleSubmit = useCallback(
     async (data: SignInFormDate): Promise<void> => {
       const messageRequired = (fieldDescription: string) =>
@@ -49,6 +49,8 @@ const SignIn: React.FC = () => {
           email: data.email,
           password: data.password,
         });
+
+        history.push('/dashboard');
       } catch (err) {
         const { ValidationError } = Yup;
 
