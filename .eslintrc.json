@@ -35,13 +35,27 @@
     "react-hooks/exhaustive-deps": "warn",
     "react/prop-types": "off",
     "no-unused-expressions": "off",
-    "no-param-reassign": ["error", { "props": false }],
+    "no-param-reassign": [
+      "error",
+      {
+        "props": false
+      }
+    ],
     "react/jsx-filename-extension": [
       1,
       {
         "extensions": [
           ".tsx"
         ]
+      }
+    ],
+    "@typescript-eslint/ban-types": [
+      "error",
+      {
+        "types": {
+          "object": false
+        },
+        "extendDefaults": true
       }
     ],
     "import/prefer-default-export": "off",
