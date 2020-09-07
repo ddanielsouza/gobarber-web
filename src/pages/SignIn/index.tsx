@@ -2,7 +2,7 @@ import React, { useRef, useCallback } from 'react';
 import { FiLogIn, FiMail, FiLock } from 'react-icons/fi';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
-
+import { Link } from 'react-router-dom';
 import { FormHandles } from '@unform/core';
 import { Container, Content, Background } from './styles';
 import logoImg from '../../assets/logo.svg';
@@ -55,13 +55,13 @@ const SignIn: React.FC = () => {
         if (err instanceof ValidationError) {
           const errors = getValidationErrors(err);
           formRef.current?.setErrors(errors);
+        } else {
+          addToast({
+            type: 'error',
+            title: 'Error autenticação',
+            description: 'Erro ao fazer login, verifique os dados inseridos',
+          });
         }
-
-        addToast({
-          type: 'error',
-          title: 'Error autenticação',
-          description: 'Erro ao fazer login, verifique os dados inseridos',
-        });
       }
     },
     [signIn, addToast],
@@ -89,10 +89,10 @@ const SignIn: React.FC = () => {
           <a href="/"> Esqueci minha senha </a>
         </Form>
 
-        <a href="/">
+        <Link to="/signup">
           <FiLogIn />
           Criar conta
-        </a>
+        </Link>
       </Content>
       <Background />
     </Container>
