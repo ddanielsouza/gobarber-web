@@ -10,6 +10,7 @@ import { ToastMessage, useToast } from '../../../hooks/toast';
 
 interface ToastProps {
   message: ToastMessage;
+  style: object;
 }
 
 const icons = {
@@ -18,7 +19,7 @@ const icons = {
   success: <FiCheckCircle size={24} />,
 };
 
-const ToastContainer: React.FC<ToastProps> = ({ message }) => {
+const ToastContainer: React.FC<ToastProps> = ({ message, style }) => {
   const { removeToast } = useToast();
 
   useEffect(() => {
@@ -32,8 +33,10 @@ const ToastContainer: React.FC<ToastProps> = ({ message }) => {
   return (
     <Container
       type={message.type}
-      hasDescription={!!message.description}
+      /* Coloquei em string pois o "spring-react" está convertendo para string e dano error no typescript */
+      hasdescription={message?.description ? 'true' : 'false'}
       key={message.id}
+      style={style}
     >
       {icons[message.type || 'info']}
 
