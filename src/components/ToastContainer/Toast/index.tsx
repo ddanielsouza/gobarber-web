@@ -34,7 +34,7 @@ const ToastContainer: React.FC<ToastProps> = ({ message, style }) => {
     <Container
       type={message.type}
       /* Coloquei em string pois o "spring-react" está convertendo para string e dano error no typescript */
-      hasDescription={message?.description ? 'true' : 'false'}
+      hasdescription={message?.description ? 'true' : 'false'}
       key={message.id}
       style={style}
     >

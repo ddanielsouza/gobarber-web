@@ -1,4 +1,4 @@
 export interface ToastProps {
   type?: 'success' | 'info' | 'error' | undefined | null;
-  hasDescription: boolean | 'true' | 'false';
+  hasdescription: boolean | 'true' | 'false';
 }
