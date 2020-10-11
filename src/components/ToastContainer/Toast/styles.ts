@@ -60,8 +60,8 @@ export const Container = styled(animated.div)<ToastProps>`
     color: inherit;
   }
 
-  ${({ hasdescription }) =>
-    (hasdescription === false || hasdescription === 'false') &&
+  ${({ hasDescription }) =>
+    (hasDescription === false || hasDescription === 'false') &&
     css`
       align-items: center;
 
