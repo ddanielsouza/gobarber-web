@@ -82,6 +82,7 @@ export const Schedule = styled.div`
     span {
       display: flex;
       align-items: center;
+      text-transform: capitalize;
     }
 
     span + span::before {
@@ -166,7 +167,7 @@ export const Appointment = styled.div`
   align-items: center;
 
   & + div {
-    margin-bottom: 16px;
+    margin-top: 16px;
   }
 
   span {
