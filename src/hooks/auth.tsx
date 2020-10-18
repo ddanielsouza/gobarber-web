@@ -1,5 +1,12 @@
-import React, { createContext, useCallback, useState, useContext } from 'react';
+import React, {
+  createContext,
+  useCallback,
+  useState,
+  useContext,
+  useEffect,
+} from 'react';
 import api from '../services/api';
+import { useToast } from './toast';
 
 interface User {
   id: string;
@@ -28,6 +35,8 @@ export const AuthContext = createContext<AuthContextState>(
 );
 
 export const AuthProvider: React.FC = ({ children }) => {
+  const { addToast } = useToast();
+
   const [data, setData] = useState<AuthState>(() => {
     const token = localStorage.getItem('@GoBarber:token');
     const user = localStorage.getItem('@GoBarber:users');
@@ -64,6 +73,24 @@ export const AuthProvider: React.FC = ({ children }) => {
 
     setData({} as AuthState);
   }, []);
+
+  useEffect(() => {
+    api.interceptors.response.use(
+      response => response,
+      error => {
+        if (error.response.status === 401 && data.user) {
+          addToast({
+            title: 'Sessão expirada',
+            description: 'Sessão expirada! Faça login novamente',
+            type: 'info',
+          });
+
+          signOut();
+        }
+        return Promise.reject(error);
+      },
+    );
+  }, [signOut, addToast, data.user]);
 
   return (
     <AuthContext.Provider value={{ user: data.user, signIn, signOut }}>
