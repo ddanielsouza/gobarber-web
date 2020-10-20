@@ -12,6 +12,7 @@ interface User {
   id: string;
   avatar_url: string;
   name: string;
+  email: string;
 }
 
 interface SignInCredentials {
@@ -28,6 +29,7 @@ interface AuthContextState {
   user: User;
   signIn(credentials: SignInCredentials): Promise<void>;
   signOut(): void;
+  updateUser(user: User): void;
 }
 
 export const AuthContext = createContext<AuthContextState>(
@@ -74,6 +76,18 @@ export const AuthProvider: React.FC = ({ children }) => {
     setData({} as AuthState);
   }, []);
 
+  const updateUser = useCallback(
+    (user: User) => {
+      localStorage.setItem('@GoBarber:user', JSON.stringify(user));
+
+      setData({
+        token: data.token,
+        user,
+      });
+    },
+    [setData, data.token],
+  );
+
   useEffect(() => {
     api.interceptors.response.use(
       response => response,
@@ -93,7 +107,9 @@ export const AuthProvider: React.FC = ({ children }) => {
   }, [signOut, addToast, data.user]);
 
   return (
-    <AuthContext.Provider value={{ user: data.user, signIn, signOut }}>
+    <AuthContext.Provider
+      value={{ user: data.user, signIn, signOut, updateUser }}
+    >
       {children}
     </AuthContext.Provider>
   );
